@@ -5,76 +5,134 @@ date: 2026-11-23
 lang: en
 ---
 
-> From 10 items, 3 important content pieces were selected
+> From 27 items, 5 important content pieces were selected
 
 ---
 
 **Technology News**
-1. [Anthropic&\#x27;s data-center power projected at 87% gas, 11% coal in 2028](#item-tech-news-1) ⭐️ 7.0/10
-2. [OpenAI Post Links Perplexity to Model Intelligence, Sparking Debate](#item-tech-news-2) ⭐️ 7.0/10
+1. [OpenAI examines perplexity as an intelligence measure, prompting benchmark debate](#item-tech-news-1) ⭐️ 7.0/10
+2. [FT Report Alleges Prince Group Figure Helped Smuggle Nvidia Chips to China](#item-tech-news-2) ⭐️ 7.0/10
 
 **Technology Blog**
-1. [When in Doubt, Flail: Experimenting Under Uncertainty](#item-tech-blog-1) ⭐️ 6.0/10
+1. [When in Doubt, Flail About](#item-tech-blog-1) ⭐️ 6.0/10
+
+**Financial News**
+1. [US Tech Selloff Prompts Asian Market Stabilization Measures](#item-finance-news-1) ⭐️ 8.0/10
+2. [Ant Group Leads $100 Million Round in China&\#x27;s Simplexity Robotics at $1.6 Billion Valuation](#item-finance-news-2) ⭐️ 7.0/10
 
 ---
 
 ## Technology News
 
 <a id="item-tech-news-1"></a>
-### [Anthropic&\#x27;s data-center power projected at 87% gas, 11% coal in 2028](https://betterdatacenterproject.com/2026/11/16/how-ai-is-powered-a-breakdown-of-byop-and-grid-power/) ⭐️ 7.0/10
+### [OpenAI examines perplexity as an intelligence measure, prompting benchmark debate](https://openai.com/index/perplexity-and-intelligence/) ⭐️ 7.0/10
 
-A Better Data Center Project analysis discussed on Hacker News projects that 87% of Anthropic&\#x27;s data-center power will come from natural gas and 11% from coal in 2028. The figures are a forecast for the company&\#x27;s future power sourcing, not measured operating data or a confirmed Anthropic commitment. The surrounding discussion focuses on AI infrastructure&\#x27;s energy use, local pollution and regulation.
+OpenAI published a conceptual article examining the relationship between language-model perplexity and intelligence, framed around cross-entropy loss trends and evaluation benchmarks. The supplied item includes no full article, methodology, or data, so its specific claims and any model comparisons cannot be verified from the available source. This is analysis, not a model release or an independently measured result.
 
-hackernews · happosai · Nov 22, 08:57 · [Discussion](https://news.ycombinator.com/item?id=50597612)
+hackernews · acossta · Nov 22, 17:06 · [Discussion](https://news.ycombinator.com/item?id=50601525)
 
-**「Why leased capacity sets Anthropic&\#x27;s fuel mix」** Anthropic does not build most of its own data centers; it leases capacity, including an arrangement for xAI&\#x27;s Colossus 1 cluster in the Memphis, Tennessee–Southaven, Mississippi area, where on-site gas turbines have drawn complaints about local air pollution. Because that compute is contracted rather than owned, the fuel mix of the facilities Anthropic rents — not its own procurement — is what drives its projected 2028 power profile.
+**「Context」** The piece is by Jakub Pachocki, OpenAI&\#x27;s chief scientist, who argues for establishing perplexity — equivalently, cross-entropy loss — as a metric for comparing model developers and informing shared safety standards. Perplexity quantifies how surprised a model is when predicting the next token, making lower values indicate better prediction; a random predictor&\#x27;s perplexity approaches the vocabulary size. Hacker News discussion criticized the post for arguing from cross-entropy without explaining the relationship among entropy, log-perplexity, and perplexity itself.
 
-**「Impact」** Under the projected 2028 mix, 87% of Anthropic’s data-center power would come from gas and 11% from coal, so communities hosting those sites and the grids serving them would absorb most of the emissions and demand growth from Anthropic’s compute expansion. Buyers and regulators evaluating that compute footprint should treat it as fossil-dominated through 2028, not as a renewable-backed load.
+**「Impact」** For model evaluators, the practical consequence is that a held-out perplexity score can be a simpler comparison than task-specific benchmarks, but it is only comparable when the evaluation set and vocabulary are held constant, since the worst-case perplexity equals vocabulary size.
 
-**「Community discussion」** Commenters criticized Anthropic over its leasing of Colossus 1 and what they described as local pollution in Memphis, with one arguing the company has made no US renewable commitments; others said regulation is needed because environmental and social costs are otherwise externalized. A separate thread debated the scale of data-center energy use and the role of shale-gas byproducts and flaring.
+**「Community discussion」** Commenters debated whether perplexity is a meaningful capability signal: one supplied a plain-language definition—next-token surprise bounded between 1 and vocabulary size—while another argued the correspondence is expected because prediction and compression capture world-model quality. Another commenter called the cross-entropy trend surprisingly clear and welcomed a simpler benchmark, and one claimed Microsoft had joined a shared held-out evaluation effort; those are thread opinions and claims, not findings established by the source.
 
 <details><summary>References</summary>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Colossus_%28data_center%29">Colossus ( data center ) - Wikipedia</a></li>
-<li><a href="https://www.thebureauinvestigates.com/stories/2026-08-14/misaligned-colossus-musks-data-empire-anthropic">How Musk’s toxic data empire is powering Anthropic ’s… | TBIJ</a></li>
-<li><a href="https://nextomoro.com/compute-rent/">Compute rent: what the Anthropic -xAI Colossus deal... | nextomoro</a></li>
-<li><a href="https://betterdatacenterproject.com/2026/11/16/how-ai-is-powered-a-breakdown-of-byop-and-grid-power/">How AI is powered : a breakdown of BYOP and grid power</a></li>
+<li><a href="https://openai.com/index/perplexity-and-intelligence/">Perplexity and Intelligence | OpenAI</a></li>
+<li><a href="https://news.ycombinator.com/item?id=50601525">Perplexity and Intelligence | Hacker News</a></li>
 
 </ul>
 </details>
 
-**Tags**: `#AI infrastructure`, `#data centers`, `#energy`, `#environmental impact`, `#Anthropic`
+**Tags**: `#language models`, `#perplexity`, `#model evaluation`, `#AI research`, `#OpenAI`
 
 ---
 
 <a id="item-tech-news-2"></a>
-### [OpenAI Post Links Perplexity to Model Intelligence, Sparking Debate](https://openai.com/index/perplexity-and-intelligence/) ⭐️ 7.0/10
+### [FT Report Alleges Prince Group Figure Helped Smuggle Nvidia Chips to China](https://www.ft.com/content/f3ad8a81-3890-4a8a-8853-ff0a94b08ba9?syn-25a6b1a6=1) ⭐️ 7.0/10
 
-OpenAI has published a post discussing perplexity—the degree of surprise a language model shows when predicting the next token—as a measure connected to model intelligence. The supplied material does not include the post&\#x27;s text, so its specific evidence, benchmarks, or quantitative claims cannot be verified here. The piece nonetheless prompted detailed technical discussion about cross-entropy loss, evaluation benchmarks, and prediction-based views of intelligence.
+The Financial Times, in a report relayed by a Telegram channel, alleged that Hu Xiaowei—identified by the U.S. Treasury Department as the &quot;number two&quot; figure at Cambodia&\#x27;s Prince Group—helped smuggle Nvidia chips into China. The report also alleged that the group had a network of shell companies and underground financing channels and used private jets to move goods. Citing trade data, it said a Malaysian subsidiary of Megaspeed declared about $4.6 billion in imports from December 2024 to December 2025, with some chips reportedly reaching China&\#x27;s black market. Prince Group denied that Hu worked for it and said the allegations about an illegal network and private-jet smuggling lacked factual basis; the claims have not been independently verified in the supplied material.
 
-hackernews · acossta · Nov 22, 17:06 · [Discussion](https://news.ycombinator.com/item?id=50601525)
+telegram · zaihuapd · Nov 22, 04:34
 
-**「Background」** Perplexity is a standard language-modeling metric that gauges how surprised a model is when predicting each next token; lower is better, with a perfect predictor scoring 1 and a random predictor approaching the vocabulary size. OpenAI&\#x27;s post connects this training-time measure to broader model intelligence, which is why the argument invites scrutiny of how prediction quality relates to capability.
+**「Background」** Megaspeed, the buyer named in the report, is Nvidia&\#x27;s largest client in south-east Asia and has already been accused of breaching US export controls to divert Nvidia chips into China, according to DW. The Financial Times has separately reported that former Megaspeed executive Alice Huang sits at the centre of US investigations into the underground chip trade. The broader scrutiny has produced criminal charges: in March a founder of Super Micro Computer was charged with smuggling $2.5 billion worth of servers containing Nvidia chips to China, CNN Business reported.
 
-**「Community Discussion」** Commenters debated the post&\#x27;s framing: hazrmard noted that perplexity was not defined in the article and explained it as next-token surprise bounded by vocabulary size, while jrflo called the apparent cross-entropy trend surprising given increasing use of RL and welcomed a simpler benchmark. tensor questioned claims that abilities &quot;emerge&quot; at particular perplexities, arguing that task-specialized smaller models may have high perplexity on other tasks, and d\_burfoot endorsed the view that prediction or compression rate on raw data captures progress toward intelligence.
+**「Impact」** Export-control investigators and Nvidia supply-chain partners now have a named intermediary—Megaspeed&\#x27;s Malaysian subsidiary—and a $4.6 billion declaration figure to examine; the supplied material reports no charge or court finding against Megaspeed or Prince Group.
 
-**Tags**: `#perplexity`, `#language-models`, `#model-evaluation`, `#machine-learning`, `#OpenAI`
+<details><summary>References</summary>
+<ul>
+<li><a href="https://www.ft.com/content/f3ad8a81-3890-4a8a-8853-ff0a94b08ba9?syn-25a6b1a6=1">Alice Huang’s links to the chip underworld</a></li>
+<li><a href="https://www.dw.com/en/megaspeed-and-the-battle-to-go-high-end-nvidia-chips-into-china/a-79909129">Megaspeed : Nvidia partner at the center of the spy affair</a></li>
+<li><a href="https://www.cnn.com/2026/11/16/tech/nvidia-sex-spies-serious-problems">Lies, spies and sex are just one part of the Nvidia story. | CNN Business</a></li>
+
+</ul>
+</details>
+
+**Tags**: `#Nvidia`, `#chip smuggling`, `#export controls`, `#AI hardware`
 
 ---
 
 ## Technology Blog
 
 <a id="item-tech-blog-1"></a>
-### [When in Doubt, Flail: Experimenting Under Uncertainty](https://seangoedecke.com/when-in-doubt-flail-about/) ⭐️ 6.0/10
+### [When in Doubt, Flail About](https://seangoedecke.com/when-in-doubt-flail-about/) ⭐️ 6.0/10
 
 rss · Sean Goedecke · Nov 23, 00:00
 
-**「Background」** When an engineer faces a situation with no clear guidance and no obvious path forward, the instinct is to wait until the situation is better understood. Sean Goedecke argues the opposite: in ambiguous situations, the faster route to understanding is usually to act.
+**「Background」** Sean Goedecke argues that when guidance is unclear or the path forward is unknown, the cautious instinct to wait for understanding is usually worse than deliberate experimentation.
 
-**「Solution」** His heuristic is to &quot;flail&quot;: try many different things, watch feedback extremely carefully, and ruthlessly drop whatever isn&\#x27;t drawing positive response. Volume matters for three reasons. It gives direct contact with reality, like a caveman pressing every button on an iPhone; most plans will be bad, so you need many attempts for one to work; and holding ten plans keeps you from over-investing in any single one. Goedecke applies this to three settings. Product flailing suits features without product-market fit — at GitHub Models, an integration letting AI inference run from a GitHub Actions token was unexpectedly sticky and seeded &quot;Continuous AI.&quot; Engineering flailing beats studying a huge, tangled system end to end; instead make speculative changes and keep only what looks like an improvement, a task he notes AI agents now help with. Organizational flailing suits senior and staff engineers facing non-technical problems: automate manual work, volunteer for tasks, propose long-term plans. The author concedes the risk: flailing badly damages reputations in tech companies, and feedback discipline matters most in the organizational case, where dropping a failing plan builds trust while pressing on directs others&\#x27; frustration at you.
+**「Solution」** His heuristic, which he calls “flailing,” rests on trying many different things, paying close attention to feedback from experts and reality, and ruthlessly dropping approaches that do not get positive results. Trying many options provides direct contact with reality, acknowledges that most plans will fail, and prevents overinvestment in any single plan. He applies this to product work, where GitHub Models features mostly failed but inference from a GitHub Actions token proved sticky and seeded “Continuous AI”; to complex engineering systems, where speculative changes should be kept only if they appear to improve things; and to organizational problems, where trying automation, volunteering, or long-term plans can show effort, though feedback is especially critical. He warns that bad flailing can damage a reputation, and that from the inside the approach often feels like repeated failure rather than sensible experimentation.
 
-**「Takeaway」** Goedecke&\#x27;s point is that the uncomfortable sense of flailing is a psychological barrier rather than a warning sign: so long as you stay sensitive to feedback and abandon plans that fail, broad experimentation is often the quickest way to become useful in unclear situations.
+**「Takeaway」** Under genuine uncertainty, rapid, low-commitment experimentation with tight feedback is often more effective than exhaustive upfront understanding—provided failing approaches are dropped quickly. The uncomfortable feeling of flailing is not necessarily evidence that the approach is wrong.
 
-**Tags**: `#engineering judgment`, `#experimentation`, `#feedback loops`, `#organizational dynamics`, `#product development`
+**Tags**: `#engineering practice`, `#experimentation`, `#uncertainty`, `#feedback loops`, `#organizational dynamics`
+
+---
+
+## Financial News
+
+<a id="item-finance-news-1"></a>
+### [US Tech Selloff Prompts Asian Market Stabilization Measures](https://news.bjd.com.cn/2026/11/22/12039852.shtml) ⭐️ 8.0/10
+
+US AI and semiconductor stocks sold off on Friday, with the Nasdaq down 5.28% and the Philadelphia Semiconductor Index down nearly 11%. Mainland China, South Korea, and Taiwan announced stabilization measures, including China&\#x27;s cut of the minimum margin-financing ratio to 80% and Taiwan&\#x27;s ban on short-selling below the previous close from Nov. 23.
+
+telegram · zaihuapd · Nov 22, 13:24
+
+**「Background」** The emergency measures follow a global retreat from AI and chip shares that began earlier in November, when the Philadelphia Semiconductor Index fell roughly 13% over two weeks. China&\#x27;s margin-financing requirement had been 100%, so cutting it to 80% frees roughly ¥400bn in potential buying power, according to a summary of the measures.
+
+**「Impact」** The measures directly affect leveraged buyers and short sellers in these markets by changing collateral requirements or restricting bearish trades.
+
+<details><summary>References</summary>
+<ul>
+<li><a href="https://www.caixinglobal.com/2026-11-01/cover-story-the-global-tech-selloff-tests-the-economics-behind-ai-boom-102499694.html">Cover Story: The Global Tech Sell - Off Tests the Economics Behind AI ...</a></li>
+<li>China, South Korea and Taiwan are pulling out the emergency playbook ...</li>
+
+</ul>
+</details>
+
+**Tags**: `#US tech selloff`, `#semiconductor stocks`, `#Asian market stabilization`, `#short-selling restrictions`, `#margin financing`
+
+---
+
+<a id="item-finance-news-2"></a>
+### [Ant Group Leads $100 Million Round in China&\#x27;s Simplexity Robotics at $1.6 Billion Valuation](https://www.bloomberg.com/news/articles/2026-11-22/ant-group-bets-on-simplexity-to-thrive-in-china-s-humanoid-race) ⭐️ 7.0/10
+
+Ant Group led a $100 million pre-A funding round in Chinese embodied-intelligence startup Simplexity Robotics, valuing the company at $1.6 billion after the investment, according to Bloomberg. Existing investors Alibaba, Tencent, HongShan and BlueRun Ventures also participated, chairman and co-founder Wang Kai confirmed to Bloomberg.
+
+telegram · zaihuapd · Nov 23, 02:02
+
+**「Background」** Founded in Hangzhou in July 2025, Simplexity had already disclosed five funding rounds totaling 2 billion yuan by March 2026, when its post-money valuation exceeded $1 billion, Bloomberg reported.
+
+**「Who is affected」** The funding gives Simplexity capital to fight for share against more established Chinese makers such as Unitree and UBTech, in a market where Chinese vendors already accounted for roughly 97% of global humanoid-robot shipments in the third quarter of 2026, according to Smart Analytics Global.
+
+<details><summary>References</summary>
+<ul>
+<li><a href="https://smartanalyticsglobal.com/global-humanoid-robot-shipments-q3-2026-agibot-ubtech-unitree/">SAG: Global Humanoid Robot Shipments Surge 347% YoY in Q3 ...</a></li>
+
+</ul>
+</details>
+
+**Tags**: `#embodied AI`, `#humanoid robots`, `#venture funding`, `#Ant Group`, `#China tech`
 
 ---
