@@ -28,6 +28,7 @@ logger = logging.getLogger(__name__)
 
 REDDIT_BASE = "https://www.reddit.com"
 OLD_REDDIT_BASE = "https://old.reddit.com"
+ARCTIC_BASE = "https://arctic-shift.photon-reddit.com"
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -113,15 +114,99 @@ class RedditScraper(BaseScraper):
                 "Reddit blocked JSON listing for r/%s; falling back to RSS",
                 cfg.subreddit,
             )
-            return await self._fetch_subreddit_rss(cfg, since)
+            try:
+                rss_items = await self._fetch_subreddit_rss(cfg, since)
+            except Exception as exc:
+                logger.warning(
+                    "Reddit RSS failed for r/%s (%s); falling back to archive API",
+                    cfg.subreddit,
+                    type(exc).__name__,
+                )
+                rss_items = []
+            if rss_items:
+                return rss_items
+            return await self._fetch_subreddit_arctic(cfg, since)
         if not data:
-            return []
+            logger.warning(
+                "Reddit JSON returned no data for r/%s; falling back to archive API",
+                cfg.subreddit,
+            )
+            return await self._fetch_subreddit_arctic(cfg, since)
 
         posts = [
             child["data"]
             for child in data.get("data", {}).get("children", [])
             if child.get("kind") == "t3"
         ]
+        items = await self._process_posts(
+            posts,
+            since,
+            "subreddit",
+            cfg.subreddit,
+            cfg.min_score,
+            cfg.category,
+            cfg.profile,
+        )
+        if items:
+            return items
+        logger.warning(
+            "Reddit JSON yielded no usable posts for r/%s; falling back to archive API",
+            cfg.subreddit,
+        )
+        return await self._fetch_subreddit_arctic(cfg, since)
+
+    async def _fetch_subreddit_arctic(
+        self, cfg: RedditSubredditConfig, since: datetime
+    ) -> List[ContentItem]:
+        """Fallback for networks where reddit.com blocks anonymous reads.
+
+        Arctic Shift (https://arctic-shift.photon-reddit.com) archives Reddit
+        submissions with the original field names, so the records feed straight
+        into _process_posts without translation.
+        """
+        params = {
+            "subreddit": cfg.subreddit,
+            "limit": 100,
+            "sort": "desc",
+            "after": int(since.timestamp()),
+        }
+        payload = None
+        last_error: Optional[Exception] = None
+        for attempt in range(3):
+            try:
+                response = await self.client.get(
+                    f"{ARCTIC_BASE}/api/posts/search", params=params, timeout=30.0
+                )
+                response.raise_for_status()
+                payload = response.json()
+                break
+            except Exception as exc:
+                last_error = exc
+                if attempt < 2:
+                    await asyncio.sleep(2 * (attempt + 1))
+        if payload is None:
+            logger.warning(
+                "Reddit archive API failed for r/%s (%s)",
+                cfg.subreddit,
+                type(last_error).__name__ if last_error else "unknown",
+            )
+            return []
+
+        posts = payload.get("data") or []
+        if not posts:
+            logger.info("Reddit archive API returned no posts for r/%s", cfg.subreddit)
+            return []
+
+        # 归档接口按时间倒序返回；本地按热度模拟 hot/top 的排序意图
+        if cfg.sort in ("hot", "top", "controversial"):
+            posts.sort(key=lambda item: item.get("score") or 0, reverse=True)
+        posts = posts[: cfg.fetch_limit]
+
+        logger.info(
+            "Reddit archive API supplied %d candidate posts for r/%s",
+            len(posts),
+            cfg.subreddit,
+        )
         return await self._process_posts(
             posts,
             since,
@@ -130,6 +215,7 @@ class RedditScraper(BaseScraper):
             cfg.min_score,
             cfg.category,
             cfg.profile,
+            comments_enabled=False,
         )
 
     async def _fetch_subreddit_rss(
@@ -377,10 +463,11 @@ class RedditScraper(BaseScraper):
         min_score: int,
         category: Optional[str] = None,
         profile: ProfileRoute = None,
+        comments_enabled: bool = True,
     ) -> List[ContentItem]:
         valid_posts = []
         comment_tasks = []
-        fetch_comments = self.reddit_config.fetch_comments
+        fetch_comments = self.reddit_config.fetch_comments if comments_enabled else 0
 
         for post in posts:
             created = datetime.fromtimestamp(
